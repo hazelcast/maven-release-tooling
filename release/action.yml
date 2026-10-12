@@ -68,12 +68,12 @@ runs:
         git push
 
     - uses: hazelcast/docker-actions/get-tag-name@master
+      id: tag-name
       with:
         VERSION: ${{ steps.version.outputs.version }}
 
     - name: Tag
       shell: bash
-      id: tag
       run: |
         git tag "${{ steps.tag-name.outputs.TAG_NAME }}"
         git push --atomic origin HEAD "refs/tags/${{ steps.tag-name.outputs.TAG_NAME }}"
